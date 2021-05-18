@@ -1,4 +1,4 @@
-export isInt(value) {
+export function isInt(value) {
   let valid = true;
   if (!isEmpty(value))
   {
@@ -11,7 +11,7 @@ export isInt(value) {
   return valid;
 }
 
-export isDate(value) {
+export function isDate(value) {
   let valid = true;
   if (!isEmpty(value))
   {
@@ -25,7 +25,7 @@ export isDate(value) {
   return valid;
 }
 
-export isEmpty(value) {
+export function isEmpty(value) {
   let valid = true;
   if (value === undefined || value === null || value === "")
     valid &= false;

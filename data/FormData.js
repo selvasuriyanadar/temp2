@@ -1,6 +1,21 @@
 import { joinDate, treatAsUTC, daysBetween } from "../logic/date.js";
 import { isEmpty, isInt, isDate } from "../logic/validation.js";
 
+export class FormSet {
+
+  constructor(created_datetime) {
+    this.form_data_list = [];
+    this.created_datetime = created_datetime;
+  }
+
+  validate() {
+    let valid = true;
+    for (const form_data of this.form_data_list)
+      valid &= form_data.validate();
+    return valid;
+  }
+}
+
 export class FormData {
 
   constructor(form_no) {
@@ -17,7 +32,6 @@ export class FormData {
     this.men_total_salary = "";
     this.women_total_salary = "";
     this.total_salary = "";
-    this.datetime = "";
   }
 
   copy(form) {
@@ -33,7 +47,6 @@ export class FormData {
     this.men_total_salary = form.men_total_salary;
     this.women_total_salary = form.women_total_salary;
     this.total_salary = form.total_salary;
-    this.datetime = form.datetime;
   }
 
   validate() {
