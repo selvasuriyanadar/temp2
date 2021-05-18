@@ -10,13 +10,15 @@ export function storeFormDataSet(data) {
   const form_set = new FormSet(current_datetime);
   form_set.copyDeeply(data);
   company_formset_db.insert(form_set);
-  return "done";
+  return { current_datetime };
 }
 
 export function listForms(data) {
 
 }
 
-export function getFormDataSet(created_datetime) {
-  return "hai";
+export async function getFormDataSet(created_datetime) {
+  const form_set = new FormSet(created_datetime);
+  await company_formset_db.read_form_data(form_set);
+  return form_set;
 }

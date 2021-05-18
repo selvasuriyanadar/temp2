@@ -1,6 +1,10 @@
+import { FormData } from '../data/FormData.js';
+import util from 'util';
+
 export class CompanyFormSetDb{
   constructor(conn) {
     this.conn = conn;
+    this.query = util.promisify(conn.query).bind(conn);
   }
 
   insert(form_set) {
@@ -34,23 +38,28 @@ export class CompanyFormSetDb{
 
   read_form_set() {}
 
-  read_form_data(form_set) {
+  async read_form_data(form_set) {
     const stmt = `
       SELECT * FROM company_form_data
-      WHERE created_datetime == ?;
+      WHERE STRCMP(created_datetime, ?) = 0;
     `;
-    this.conn.query(stmt,
-      [form_set.created_datetime],
-      (err, rows) => {
-        if (err) throw err;
-
-        rows.forEach( (row) => {
-          const form_data = new FormData(row.form_no);
-          form_data.copy(row);
-          form_set.form_data_list.push(form_data);
-        });
-        console.log(rows);
-      }
-    );
+    try {
+      const rows = await this.query(stmt,
+        [form_set.created_datetime]
+      );
+      rows.forEach( (row) => {
+        console.log(row);
+        const form_data = new FormData(row.form_no);
+        console.log(form_data);
+        form_data.copy(row);
+        console.log(form_data);
+        form_set.form_data_list.push(form_data);
+        console.log(form_set);
+      });
+      console.log(rows);
+    }
+    catch (err) {
+      throw err;
+    }
   }
 }
