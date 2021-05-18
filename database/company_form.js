@@ -1,11 +1,11 @@
-class CompanyFormSetDb{
+export class CompanyFormSetDb{
   constructor(conn) {
     this.conn = conn;
   }
 
   insert(form_set) {
-    const stmt1 = 'INSERT INTO company_form.company_form_set SET ?';
-    const stmt2 = 'INSERT INTO company_form.company_form_data SET ?';
+    const stmt1 = 'INSERT INTO company_form_set SET ?';
+    const stmt2 = 'INSERT INTO company_form_data SET ?';
     this.conn.query(stmt1,
       {created_datetime: form_set.created_datetime},
       (err, res) => {
@@ -30,7 +30,7 @@ class CompanyFormSetDb{
 
   read_form_data(form_set) {
     const stmt = `
-      SELECT * FROM company_form.company_form_data
+      SELECT * FROM company_form_data
       WHERE created_datetime == ?;
     `;
     this.conn.query(stmt,
