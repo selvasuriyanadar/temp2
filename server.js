@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import installHandler from './api_handler.js';
+import installHandler from './view/api_handler.js';
 
 dotenv.config();
 const app = express();

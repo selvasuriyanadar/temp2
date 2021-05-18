@@ -48,18 +48,17 @@ export class CompanyFormSetDb{
         [form_set.created_datetime]
       );
       rows.forEach( (row) => {
-        console.log(row);
         const form_data = new FormData(row.form_no);
-        console.log(form_data);
         form_data.copy(row);
-        console.log(form_data);
         form_set.form_data_list.push(form_data);
-        console.log(form_set);
       });
-      console.log(rows);
     }
     catch (err) {
       throw err;
     }
+  }
+
+  save_pdf(form_set) {
+    
   }
 }

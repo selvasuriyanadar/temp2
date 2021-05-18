@@ -1,4 +1,4 @@
-import { getFormDataSet, storeFormDataSet } from './control/company_form.js';
+import { getFormDataSet, storeFormDataSet } from '../control/company_form.js';
 import express from 'express';
 
 export default function installHandler(app) {

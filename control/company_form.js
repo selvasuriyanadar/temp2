@@ -10,7 +10,7 @@ export function storeFormDataSet(data) {
   const form_set = new FormSet(current_datetime);
   form_set.copyDeeply(data);
   company_formset_db.insert(form_set);
-  return { current_datetime };
+  return { created_datetime: current_datetime };
 }
 
 export function listForms(data) {

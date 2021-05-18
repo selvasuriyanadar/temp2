@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+    table {
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    </style>
+  </head>
+</html>
+<body>
+  <div style="width: 85%; margin: 0 7.5%;">
+    <div style="text-align: center; padding-left: 50px;">
+      <h3>COMPANY FORM</h3>
+      <table>
+        <tr>
+          <th>COMPANY FORM NO</th>
+          <th>Project Name</th>
+          <th>Duration</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>No of Men Working</th>
+          <th>No of Women Working</th>
+          <th>Total Employees</th>
+          <th>Salary Per Day for Men</th>
+          <th>Salary Per Day for Women</th>
+          <th>Salary for Men for Entire Project Duration</th>
+          <th>Salary for Women for Entire Project Duration</th>
+          <th>Total Salary Spent on Men + Women for Entire Project Duration</th>
+        </tr>
+      <% if (form_set.form_data_list.length > 0) { %>
+        <% form_set.form_data_list.forEach(form_data => {%>
+          <tr>
+            <td><%= form_data.form_no %></td>
+            <td><%= form_data.project_name %></td>
+            <td><%= form_data.duration %></td>
+            <td><%= form_data.start_date %></td>
+            <td><%= form_data.end_date %></td>
+            <td><%= form_data.men_workers %></td>
+            <td><%= form_data.women_workers %></td>
+            <td><%= form_data.total_workers %></td>
+            <td><%= form_data.men_perday_salary %></td>
+            <td><%= form_data.women_perday_salary %></td>
+            <td><%= form_data.men_total_salary %></td>
+            <td><%= form_data.women_total_salary %></td>
+            <td><%= form_data.total_salary %></td>
+          </tr>
+        <% });%>
+      <% }%>
+      </table>
+    </div>
+  </div>
+</body>
