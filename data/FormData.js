@@ -1,5 +1,5 @@
 import { joinDate, treatAsUTC, daysBetween } from "../logic/date.js";
-import { isEmpty, isInt, isDate } from "../logic/validation.js";
+import { isEmpty, isInt, isDate, isDateTime } from "../logic/validation.js";
 
 export class FormSet {
 
@@ -8,8 +8,24 @@ export class FormSet {
     this.created_datetime = created_datetime;
   }
 
+  copyDeeply(data) {
+    for (const form_data of data) {
+      const form = new FormData(form_data.form_no);
+      form.copy(form_data);
+      if (form.validate())
+        this.form_data_list.push(form);
+    }
+  }
+
   validate() {
     let valid = true;
+    if (!isDateTime(this.created_datetime))
+      valid &= false;
+    return valid;
+  }
+
+  validateDeeply() {
+    let valid = this.validate();
     for (const form_data of this.form_data_list)
       valid &= form_data.validate();
     return valid;
