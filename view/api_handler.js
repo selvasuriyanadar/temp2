@@ -5,7 +5,7 @@ export default function installHandler(app) {
 
   app.use(express.json());
 
-  app.get('/api/company-form-set', async (req, res, next) => {
+  app.get('/company-form-set', async (req, res, next) => {
     try {
       const result = await getFormDataSet(req.query.created_datetime);
       res.send(result);
@@ -14,7 +14,7 @@ export default function installHandler(app) {
     }
   });
 
-  app.post('/api/company-form-set', (req, res) => {
+  app.post('/company-form-set', (req, res) => {
     res.send(storeFormDataSet(req.body));
   });
 }
